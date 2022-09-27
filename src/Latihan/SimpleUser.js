@@ -18,6 +18,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -28,6 +29,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 function MediaCard({ data, index, list, setList }) {
+  const navigate = useNavigate();
   const [openMediaCard, setOpenMediaCard] = useState(false);
   const [edit, setEdit] = useState(false);
   return (
@@ -51,7 +53,7 @@ function MediaCard({ data, index, list, setList }) {
             </Typography>
             <Button
               color="inherit"
-              sx={{ borderRadius: '25px', backgroundColor: 'aqua', color: 'white', textTransform: 'capitalize' }}
+              sx={{ borderRadius: '25px', backgroundColor: 'aqua', color: 'white', textTransform: 'capitalize', margin: '0px 5px' }}
               onClick={() => {
                 setOpenMediaCard(true);
                 setEdit(true);
@@ -59,6 +61,14 @@ function MediaCard({ data, index, list, setList }) {
               size="small"
             >
               Edit
+            </Button>
+            <Button
+              onClick={() => navigate(`/view/${index + 1}`, { state: { datas: data } })}
+              size="small"
+              color="inherit"
+              sx={{ borderRadius: '25px', backgroundColor: 'aqua', color: 'white', textTransform: 'capitalize', margin: '0px 5px' }}
+            >
+              View
             </Button>
             <DialogInput list={list} setList={setList} open={openMediaCard} data={data} setOpen={setOpenMediaCard} edit={edit} index={index} />
           </Grid>
@@ -145,26 +155,67 @@ const SimpleUser = () => {
   const [data, setData] = useState({
     name: '',
     address: '',
-    hobyy: '',
+    hobby: '',
   });
 
   return (
     <div style={{ width: '100%' }}>
+      {/* AppBar */}
       <Box sx={{ flexGrow: 1, width: '100%' }}>
         <AppBar position="static">
           <Toolbar>
             <IconButton size="large" edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
               <PeopleIcon />
             </IconButton>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              My App
-            </Typography>
-            <Button color="inherit" onClick={() => setOpen((open) => !open)} sx={{ borderRadius: '25px', backgroundColor: 'aqua', padding: '10px 15px', textTransform: 'capitalize' }}>
+            {/* Menu Bar */}
+            <NavLink
+              end
+              to="/"
+              style={({ isActive }) => {
+                console.log(isActive);
+                return isActive ? { color: 'red' } : undefined;
+              }}
+            >
+              <Typography variant="h6" component="div" sx={{ mr: '20px' }}>
+                User App
+              </Typography>
+            </NavLink>
+            <NavLink
+              to="/about"
+              style={({ isActive }) => {
+                console.log(isActive);
+                return isActive ? { color: 'red' } : undefined;
+              }}
+            >
+              <Typography variant="h6" component="div" sx={{ mr: '20px' }}>
+                About
+              </Typography>
+            </NavLink>
+            <NavLink
+              to="/hobby"
+              style={({ isActive }) => {
+                console.log(isActive);
+                return isActive ? { color: 'red' } : undefined;
+              }}
+            >
+              <Typography variant="h6" component="div" sx={{ mr: '20px' }}>
+                Hobby
+              </Typography>
+            </NavLink>
+            <Button
+              display="flex"
+              justifyContent="flex-end"
+              alignItems="flex-end"
+              color="inherit"
+              onClick={() => setOpen((open) => !open)}
+              sx={{ borderRadius: '25px', backgroundColor: 'aqua', padding: '10px 15px', textTransform: 'capitalize' }}
+            >
               Add User
             </Button>
           </Toolbar>
         </AppBar>
       </Box>
+
       <Box sx={{ width: '100%', textAlign: 'center', mt: '4%' }}>
         <Typography variant="h4">User Data</Typography>
       </Box>
