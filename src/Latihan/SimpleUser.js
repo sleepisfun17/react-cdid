@@ -19,6 +19,8 @@ import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { Container } from '@mui/system';
+import { getPost } from '../api/mainpages/APIPosts';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -53,7 +55,7 @@ function MediaCard({ data, index, list, setList }) {
             </Typography>
             <Button
               color="inherit"
-              sx={{ borderRadius: '25px', backgroundColor: 'aqua', color: 'white', textTransform: 'capitalize', margin: '0px 5px' }}
+              sx={{ borderRadius: '25px', backgroundColor: 'aqua', color: 'white', textTransform: 'capitalize', margin: '5px 5px' }}
               onClick={() => {
                 setOpenMediaCard(true);
                 setEdit(true);
@@ -66,7 +68,7 @@ function MediaCard({ data, index, list, setList }) {
               onClick={() => navigate(`/view/${index + 1}`, { state: { datas: data } })}
               size="small"
               color="inherit"
-              sx={{ borderRadius: '25px', backgroundColor: 'aqua', color: 'white', textTransform: 'capitalize', margin: '0px 5px' }}
+              sx={{ borderRadius: '25px', backgroundColor: 'aqua', color: 'white', textTransform: 'capitalize', margin: '5px 5px' }}
             >
               View
             </Button>
@@ -202,33 +204,45 @@ const SimpleUser = () => {
                 Hobby
               </Typography>
             </NavLink>
+            <NavLink
+              to="/tugas6"
+              style={({ isActive }) => {
+                console.log(isActive);
+                return isActive ? { color: 'red' } : undefined;
+              }}
+            >
+              <Typography variant="h6" component="div" sx={{ mr: '20px' }}>
+                Tugas6
+              </Typography>
+            </NavLink>
             <Button
               display="flex"
               justifyContent="flex-end"
               alignItems="flex-end"
               color="inherit"
               onClick={() => setOpen((open) => !open)}
-              sx={{ borderRadius: '25px', backgroundColor: 'aqua', padding: '10px 15px', textTransform: 'capitalize' }}
+              sx={{ borderRadius: '25px', backgroundColor: 'aqua', padding: '10px 15px', textTransform: 'capitalize', marginLeft: 'auto' }}
             >
               Add User
             </Button>
           </Toolbar>
         </AppBar>
       </Box>
-
-      <Box sx={{ width: '100%', textAlign: 'center', mt: '4%' }}>
-        <Typography variant="h4">User Data</Typography>
-      </Box>
-      <div style={{ marginLeft: '15%', marginTop: '20px' }}>
-        <TextField value={name} onChange={(e) => setName(e.target.value)} id="outlined-search" label="Search" type="search" />
-      </div>
-      <DialogInput open={open} setOpen={setOpen} data={data} list={list} setList={setList} />
-      {/* <BasicStack /> */}
-      <div style={{ marginLeft: '13%', width: '80%', marginTop: '30px' }}>
-        {list.map((el, index) => {
-          if (el.name.includes(name)) return <MediaCard list={list} setList={setList} index={index} key={index} data={el} />;
-        })}
-      </div>
+      <Container>
+        <Box sx={{ width: '100%', textAlign: 'center', mt: '4%' }}>
+          <Typography variant="h4">User Data</Typography>
+        </Box>
+        <div style={{ marginLeft: '15%', marginTop: '20px' }}>
+          <TextField value={name} onChange={(e) => setName(e.target.value)} id="outlined-search" label="Search" type="search" />
+        </div>
+        <DialogInput open={open} setOpen={setOpen} data={data} list={list} setList={setList} />
+        {/* <BasicStack /> */}
+        <div style={{ marginLeft: '13%', width: '80%', marginTop: '30px' }}>
+          {list.map((el, index) => {
+            if (el.name.includes(name)) return <MediaCard list={list} setList={setList} index={index} key={index} data={el} />;
+          })}
+        </div>
+      </Container>
     </div>
   );
 };
