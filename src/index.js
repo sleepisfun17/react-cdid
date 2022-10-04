@@ -11,9 +11,16 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Container } from '@mui/system';
 import Tugas6 from './Tugas/tugas6/Tugas6';
-import ButtonAppBar from './component/AppBar/ButtonAppBar';
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: process.env.REACT_APP_COLOR_PRIMARY,
+    },
+    secondary: {
+      main: '#f44336',
+    },
+  },
   typography: {
     fontFamily: 'Quicksand',
   },

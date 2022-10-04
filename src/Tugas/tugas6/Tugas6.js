@@ -22,8 +22,8 @@ import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
 import WorkIcon from '@mui/icons-material/Work';
 import BeachAccessIcon from '@mui/icons-material/BeachAccess';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { red } from '@mui/material/colors';
+import PropTypes from 'prop-types';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -135,31 +135,35 @@ const Tugas6 = () => {
       </Box>
       <Container maxWidth="lg">
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={9}>
-            <Item sx={{ minHeight: '100vh' }} direction="row">
-              {loading && <Typography component={'h6'}>Loading🤔🤔🤔</Typography>}
-              <Card sx={{ maxWidth: 345 }}>
-                {postData.map((item, index) => (
-                  <>
-                    <CardHeader
-                      avatar={
-                        <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                          R
-                        </Avatar>
-                      }
-                      title={item.title}
-                      subheader={item.datePost}
-                    />
-                    <CardMedia component="img" height="194" image={item.img} alt="Food" />
-                    <CardContent>
-                      <Typography variant="body2" color="text.secondary">
-                        {item.description}
-                      </Typography>
-                    </CardContent>
-                  </>
-                ))}
-              </Card>
-            </Item>
+          <Grid xs={12} sm={9}>
+            <Grid container>
+              <Grid item xs={6} sm={6}>
+                <Item sx={{ minHeight: '100vh' }} direction="row">
+                  {loading && <Typography component={'h6'}>Loading🤔🤔🤔</Typography>}
+                  <Card sx={{ maxWidth: 345 }}>
+                    {postData.map((item, index) => (
+                      <>
+                        <CardHeader
+                          avatar={
+                            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                              R
+                            </Avatar>
+                          }
+                          title={item.title}
+                          subheader={item.datePost}
+                        />
+                        <CardMedia component="img" height="194" image={item.img} alt="Food" />
+                        <CardContent>
+                          <Typography variant="body2" color="text.secondary">
+                            {item.description}
+                          </Typography>
+                        </CardContent>
+                      </>
+                    ))}
+                  </Card>
+                </Item>
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={0} sm={3}>
             <ItemSidebar sx={{ minHeight: '100vh' }}>
@@ -196,5 +200,7 @@ const Tugas6 = () => {
     </div>
   );
 };
+
+Grid.propTypes = {};
 
 export default Tugas6;
