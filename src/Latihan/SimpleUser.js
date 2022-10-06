@@ -21,6 +21,8 @@ import Grid from '@mui/material/Grid';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Container } from '@mui/system';
 import { getPost } from '../api/mainpages/APIPosts';
+import useColor from '../hooks/useColor';
+import useTitle from '../hooks/useTitle';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -159,6 +161,8 @@ const SimpleUser = () => {
     address: '',
     hobby: '',
   });
+
+  const { color, setColor } = useColor('#000000');
 
   return (
     <div style={{ width: '100%' }}>

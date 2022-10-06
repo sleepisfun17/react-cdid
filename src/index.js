@@ -9,8 +9,11 @@ import About from './Latihan/About';
 import Hobby from './Latihan/Hobby';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Container } from '@mui/system';
+import { color, Container } from '@mui/system';
 import Tugas6 from './Tugas/tugas6/Tugas6';
+import ButtonAppBar from './component/AppBar/ButtonAppBar';
+import SearchAppBar from './component/AppBar/SearchAppBar';
+import { CommonProvider } from './context/CommonContext';
 
 const theme = createTheme({
   palette: {
@@ -38,17 +41,20 @@ const theme = createTheme({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<SimpleUser />} />
-          <Route exact path="/tugas6" element={<Tugas6 />} />
-          <Route exact path="/about" element={<About />}></Route>
-          <Route exact path="/hobby" element={<Hobby />}></Route>
-          <Route exacy path="/view/:id" element={<ViewPage />}></Route>
-        </Routes>
-      </Router>
-    </ThemeProvider>
+    <CommonProvider>
+      <ThemeProvider theme={theme}>
+        <SearchAppBar />
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<SimpleUser />} />
+            <Route exact path="/tugas6" element={<Tugas6 />} />
+            <Route exact path="/about" element={<About />}></Route>
+            <Route exact path="/hobby" element={<Hobby />}></Route>
+            <Route exacy path="/view/:id" element={<ViewPage />}></Route>
+          </Routes>
+        </Router>
+      </ThemeProvider>
+    </CommonProvider>
   </React.StrictMode>
 );
 
