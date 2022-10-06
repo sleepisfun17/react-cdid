@@ -41,20 +41,18 @@ const theme = createTheme({
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CommonProvider>
-      <ThemeProvider theme={theme}>
-        <SearchAppBar />
-        <Router>
-          <Routes>
-            <Route exact path="/" element={<SimpleUser />} />
-            <Route exact path="/tugas6" element={<Tugas6 />} />
-            <Route exact path="/about" element={<About />}></Route>
-            <Route exact path="/hobby" element={<Hobby />}></Route>
-            <Route exacy path="/view/:id" element={<ViewPage />}></Route>
-          </Routes>
-        </Router>
-      </ThemeProvider>
-    </CommonProvider>
+    <ThemeProvider theme={theme}>
+      <SearchAppBar />
+      <Router>
+        <Routes>
+          <Route exact path="/" element={<SimpleUser />} />
+          <Route exact path="/tugas6" element={<Tugas6 />} />
+          <Route exact path="/about" element={<About />}></Route>
+          <Route exact path="/hobby" element={<Hobby />}></Route>
+          <Route exacy path="/view/:id" element={<ViewPage />}></Route>
+        </Routes>
+      </Router>
+    </ThemeProvider>
   </React.StrictMode>
 );
 

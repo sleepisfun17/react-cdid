@@ -21,8 +21,9 @@ import Grid from '@mui/material/Grid';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Container } from '@mui/system';
 import { getPost } from '../api/mainpages/APIPosts';
-import useColor from '../hooks/useColor';
-import useTitle from '../hooks/useTitle';
+import { GoogleLogin } from 'react-google-login';
+import { gapi } from 'gapi-script';
+import { GoogleLogout } from 'react-google-login';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -153,6 +154,24 @@ const DialogInput = ({ open, setOpen, data, list, setList, edit, index }) => {
 };
 
 const SimpleUser = () => {
+  const clientId = '105434446859-bbr1c6j0osuqg15667migi4qdl69lel6.apps.googleusercontent.com';
+
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: '',
+      });
+    };
+    gapi.load('client:auth2', initClient);
+  });
+  const onSuccess = (res) => {
+    console.log('success:', res);
+  };
+  const onFailure = (err) => {
+    console.log('failed:', err);
+  };
+
   const [open, setOpen] = useState(false);
   const [list, setList] = useState([]);
   const [name, setName] = useState('');
@@ -161,8 +180,6 @@ const SimpleUser = () => {
     address: '',
     hobby: '',
   });
-
-  const { color, setColor } = useColor('#000000');
 
   return (
     <div style={{ width: '100%' }}>
@@ -232,6 +249,7 @@ const SimpleUser = () => {
           </Toolbar>
         </AppBar>
       </Box>
+
       <Container>
         <Box sx={{ width: '100%', textAlign: 'center', mt: '4%' }}>
           <Typography variant="h4">User Data</Typography>
@@ -246,6 +264,8 @@ const SimpleUser = () => {
             if (el.name.includes(name)) return <MediaCard list={list} setList={setList} index={index} key={index} data={el} />;
           })}
         </div>
+        <GoogleLogin clientId={clientId} buttonText="Sign in with Google" onSuccess={onSuccess} onFailure={onFailure} cookiePolicy={'single_host_origin'} isSignedIn={false} />
+        {/* <GoogleLogout clientId={clientId} buttonText="Logout" onLogoutSuccess={logout}></GoogleLogout> */}
       </Container>
     </div>
   );

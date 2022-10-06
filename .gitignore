@@ -24,3 +24,5 @@ yarn-error.log*
 
 *.zip
 *.txt
+.local.env
+
