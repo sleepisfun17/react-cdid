@@ -155,7 +155,7 @@ const DialogInput = ({ open, setOpen, data, list, setList, edit, index }) => {
 
 const SimpleUser = () => {
   const [profile, setProfile] = useState([]);
-  const clientId = '105434446859-bbr1c6j0osuqg15667migi4qdl69lel6.apps.googleusercontent.com';
+  const clientId = process.env.REACT_APP_CLIENT_ID;
 
   useEffect(() => {
     const initClient = () => {
