@@ -14,6 +14,7 @@ import Tugas6 from './Tugas/tugas6/Tugas6';
 import ButtonAppBar from './component/AppBar/ButtonAppBar';
 import SearchAppBar from './component/AppBar/SearchAppBar';
 import { CommonProvider } from './context/CommonContext';
+import LoginPage from './pages/LoginPage';
 
 const theme = createTheme({
   palette: {
@@ -46,6 +47,7 @@ root.render(
       <Router>
         <Routes>
           <Route exact path="/" element={<SimpleUser />} />
+          <Route exact path="/login" element={<LoginPage />} />
           <Route exact path="/tugas6" element={<Tugas6 />} />
           <Route exact path="/about" element={<About />}></Route>
           <Route exact path="/hobby" element={<Hobby />}></Route>
